@@ -1,9 +1,6 @@
 # [UniRepLKNet: A Universal Perception Large-Kernel ConvNet for Audio, Video,Point Cloud, Time-Series and Image Recognition](https://arxiv.org/pdf/2311.15599v1.pdf)
 This is a warehouse for UniRepLKNet-pytorch-model, can be used to train your image-datasets for classification tasks.
-The code mainly comes from official source code
-
-## GhostNetV2: Enhance Cheap Operation with Long-Range Attention
-### Paper: https://arxiv.org/pdf/2211.12905.pdf
+The code mainly comes from official [source code](https://github.com/AILab-CVC/UniRepLKNet)
 
 ## Project Structure
 ```
@@ -11,8 +8,8 @@ The code mainly comes from official source code
     ├── my_dataset.py: Customize reading data sets and define transforms data enhancement methods
     ├── split_data.py: Define the function to read the image dataset and divide the training-set and test-set
     ├── threeaugment.py: Additional data augmentation methods
-├── models: GhostNetV2 Model
-    ├── build_model.py: Construct "GhostNetV2" model
+├── models: UniRepLKNet Model
+    ├── build_model.py: Construct "UniRepLKNet" model
 ├── util:
     ├── engine.py: Function code for a training/validation process
     ├── losses.py: Knowledge distillation loss, combined with teacher model (if any)
@@ -24,7 +21,7 @@ The code mainly comes from official source code
 ```
 
 ## Precautions
-Before you use the code to train your own data set, please first enter the ___train_gpu.py___ file and modify the ___data_root___, ___batch_size___ and ___nb_classes___ parameters. If you want to draw the confusion matrix and ROC curve, you only need to remove the comments of ___Plot_ROC___ and ___Predictor___ at the end of the code. For the third parameter, you should change it to the path of your own model weights file(.pth).
+Before you use the code to train your own data set, please first enter the ___train_gpu.py___ file and modify the ___data_root___, ___batch_size___, ___num_workers___ and ___nb_classes___ parameters. If you want to draw the confusion matrix and ROC curve, you only need to set the ___predict___ parameter to __True__
 
 ## Use Sophia Optimizer (in util/optimizer.py)
 You can use anther optimizer sophia, just need to change the optimizer in ___train_gpu.py___, for this training sample, can achieve better results
@@ -45,7 +42,7 @@ optimizer = SophiaG(model.parameters(), lr=2e-4, betas=(0.965, 0.99), rho=0.01, 
 6. master_port: <master node (machine/server) port number>
 ```
 ### Note: 
-If you want to use multiple GPU for training, whether it is a single machine with multiple GPUs or multiple machines with multiple GPUs, each GPU will divide the batch_size equally. For example, batch_size=4 in my train_gpu.py. If I want to use 2 GPUs for training, each GPU will divide the batch_size. That means batch_size=2 on each GPU. ___Do not let batch_size=1 on each GPU___, otherwise BN layer maybe report an error. If you recive an error like "___ONE-PEACE training and evaluation script: error: unrecognized arguments: --local-rank=1___" when you use distributed multi-GPUs training, just replace the command "___torch.distributed.launch___" to "___torch.distributed.run___".
+If you want to use multiple GPU for training, whether it is a single machine with multiple GPUs or multiple machines with multiple GPUs, each GPU will divide the batch_size equally. For example, batch_size=4 in my train_gpu.py. If I want to use 2 GPUs for training, it means that the batch_size on each GPU is 4. ___Do not let batch_size=1 on each GPU___, otherwise BN layer maybe report an error. If you recive an error like "___ONE-PEACE training and evaluation script: error: unrecognized arguments: --local-rank=1___" when you use distributed multi-GPUs training, just replace the command "___torch.distributed.launch___" to "___torch.distributed.run___".
 
 ### train model with single-machine single-GPU：
 ```
@@ -73,12 +70,10 @@ On the second machine: python -m torch.distributed.launch --nproc_per_node=1 --n
 
 ## Citation
 ```
-@article{tang2022ghostnetv2,
-  title={GhostNetv2: enhance cheap operation with long-range attention},
-  author={Tang, Yehui and Han, Kai and Guo, Jianyuan and Xu, Chang and Xu, Chao and Wang, Yunhe},
-  journal={Advances in Neural Information Processing Systems},
-  volume={35},
-  pages={9969--9982},
-  year={2022}
+@article{ding2023unireplknet,
+  title={UniRepLKNet: A Universal Perception Large-Kernel ConvNet for Audio, Video, Point Cloud, Time-Series and Image Recognition},
+  author={Ding, Xiaohan and Zhang, Yiyuan and Ge, Yixiao and Zhao, Sijie and Song, Lin and Yue, Xiangyu and Shan, Ying},
+  journal={arXiv preprint arXiv:2311.15599},
+  year={2023}
 }
 ```
