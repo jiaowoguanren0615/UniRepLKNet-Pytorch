@@ -1,4 +1,4 @@
-# UniRepLKNet: A Universal Perception Large-Kernel ConvNet for Audio, Video,Point Cloud, Time-Series and Image Recognition[(https://arxiv.org/pdf/2311.15599v1.pdf)]
+# [UniRepLKNet: A Universal Perception Large-Kernel ConvNet for Audio, Video,Point Cloud, Time-Series and Image Recognition](https://arxiv.org/pdf/2311.15599v1.pdf)
 This is a warehouse for UniRepLKNet-pytorch-model, can be used to train your image-datasets for classification tasks.
 The code mainly comes from official source code
 
